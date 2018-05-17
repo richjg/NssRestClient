@@ -2,7 +2,7 @@
 
 namespace NssRestClient
 {
-    public interface IHttpClientFactory
+    public interface INssHttpClientFactory
     {
         void Release();
         HttpClient Create(string baseUrl);

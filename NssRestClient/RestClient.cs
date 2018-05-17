@@ -11,10 +11,10 @@ namespace NssRestClient
 {
     public class RestClient : IRestClient
     {
-        private readonly IHttpClientFactory httpClientFactory;
+        private readonly INssHttpClientFactory httpClientFactory;
         private readonly IClientCredentialStore clientCredentialStore;
 
-        public RestClient(IHttpClientFactory httpClientFactory, IClientCredentialStore clientCredentialStore)
+        public RestClient(INssHttpClientFactory httpClientFactory, IClientCredentialStore clientCredentialStore)
         {
             this.httpClientFactory = httpClientFactory;
             this.clientCredentialStore = clientCredentialStore;

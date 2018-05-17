@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -15,6 +16,8 @@ namespace NssRestClient.Net
             : base(innerHandler)
         { }
 
+        private readonly static System.Net.HttpStatusCode[] HttpStatusCodesWorthRetrying = { System.Net.HttpStatusCode.RequestTimeout, System.Net.HttpStatusCode.InternalServerError, System.Net.HttpStatusCode.BadGateway, System.Net.HttpStatusCode.ServiceUnavailable, System.Net.HttpStatusCode.GatewayTimeout};
+
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             HttpResponseMessage httpResponse = null;
@@ -23,12 +26,13 @@ namespace NssRestClient.Net
                 try
                 {
                     httpResponse = await base.SendAsync(request, cancellationToken);
+
                     if (httpResponse.IsSuccessStatusCode)
                     {
                         return httpResponse;
                     }
 
-                    if(httpResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    if(HttpStatusCodesWorthRetrying.Contains(httpResponse.StatusCode) == false)
                     {
                         return httpResponse;
                     }

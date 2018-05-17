@@ -4,11 +4,11 @@ using System.Net.Http;
 
 namespace NssRestClient
 {
-    public class HttpClientFactory : IHttpClientFactory
+    public class NssHttpClientFactory : INssHttpClientFactory
     {
         private static HttpClient httpClient;
 
-        public readonly static HttpClientFactory Instance = new HttpClientFactory();
+        public readonly static NssHttpClientFactory Instance = new NssHttpClientFactory();
 
         public HttpClient Create(string baseUrl)
         {
@@ -24,7 +24,6 @@ namespace NssRestClient
                     BaseAddress = new Uri(baseUrl)
                 };
             }
-
             return httpClient;
         }
 

@@ -17,7 +17,7 @@ namespace NssRestClient.Tests
             //Arrange
             base.AddRouteHandler("/auth/token", (req, res) => res.WriteJson(new { access_token = "123456" }));
 
-            var loginService = new LoginService(new RestClient(new HttpClientFactory(), new InMemoryClientCredentialStore()));
+            var loginService = new LoginService(new RestClient(new NssHttpClientFactory(), new InMemoryClientCredentialStore()));
 
             //Act
             var result = await loginService.SignInAsync(Url, "username", "password");
@@ -32,7 +32,7 @@ namespace NssRestClient.Tests
             //Arrange
             base.AddRouteHandler("/auth/token", (req, res) => res.WriteJson(new { access_token = "123456" }));
             var clientCredentialStore = new InMemoryClientCredentialStore();
-            var loginService = new LoginService(new RestClient(new HttpClientFactory(), clientCredentialStore));
+            var loginService = new LoginService(new RestClient(new NssHttpClientFactory(), clientCredentialStore));
 
             //Act
             var result = await loginService.SignInAsync(Url, "username", "password");
@@ -54,7 +54,7 @@ namespace NssRestClient.Tests
         {
             //Arrange
             base.AddRouteHandler("/auth/token", (req, res) => res.SetStatus(System.Net.HttpStatusCode.Unauthorized) );
-            var loginService = new LoginService(new RestClient(new HttpClientFactory(), new InMemoryClientCredentialStore()));
+            var loginService = new LoginService(new RestClient(new NssHttpClientFactory(), new InMemoryClientCredentialStore()));
             
             //Act
             var result = await loginService.SignInAsync(Url, "username", "password");
@@ -68,7 +68,7 @@ namespace NssRestClient.Tests
         {
             //Arrange
             base.AddRouteHandler("/auth/token", (req, res) => throw new Exception("woop"));
-            var loginService = new LoginService(new RestClient(new HttpClientFactory(), new InMemoryClientCredentialStore()));
+            var loginService = new LoginService(new RestClient(new NssHttpClientFactory(), new InMemoryClientCredentialStore()));
             
             //Act
             var result = await loginService.SignInAsync(Url, "username", "password");

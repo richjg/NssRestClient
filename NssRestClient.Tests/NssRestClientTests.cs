@@ -21,7 +21,7 @@ namespace NssRestClient.Tests
 
             var clientCredentialStore = new InMemoryClientCredentialStore();
             await clientCredentialStore.SetAsync(new NssConnectionState { BaseUrl = Url });
-            var nssRestClient = new RestClient(new HttpClientFactory(), clientCredentialStore);
+            var nssRestClient = new RestClient(new NssHttpClientFactory(), clientCredentialStore);
 
             //Act
             var result = await nssRestClient.GetAsync<dynamic>("v6/test");
@@ -41,7 +41,7 @@ namespace NssRestClient.Tests
             {
                 c.Setup(s => s.GetAsync()).ReturnsAsync((NssConnectionState)null);
             });
-            var nssRestClient = new RestClient(new HttpClientFactory(), clientCredentialStore);
+            var nssRestClient = new RestClient(new NssHttpClientFactory(), clientCredentialStore);
             
             //Act
             var result = await nssRestClient.GetAsync<dynamic>("v6/test");
@@ -82,7 +82,7 @@ namespace NssRestClient.Tests
             {
                 c.Setup(s => s.GetAsync()).ReturnsAsync((NssConnectionState)new NssConnectionState { AccessToken = "123", BaseUrl = Url,   });
             });
-            var nssRestClient = new RestClient(new HttpClientFactory(), clientCredentialStore);
+            var nssRestClient = new RestClient(new NssHttpClientFactory(), clientCredentialStore);
 
             //Act
             var result = await nssRestClient.GetAsync<dynamic>("v6/test");
@@ -126,7 +126,7 @@ namespace NssRestClient.Tests
             {
                 c.Setup(s => s.GetAsync()).ReturnsAsync((NssConnectionState)new NssConnectionState { AccessToken = "123", BaseUrl = Url, });
             });
-            var nssRestClient = new RestClient(new HttpClientFactory(), clientCredentialStore);
+            var nssRestClient = new RestClient(new NssHttpClientFactory(), clientCredentialStore);
 
             //Act
             var result1 = await nssRestClient.GetAsync<dynamic>("v6/test");

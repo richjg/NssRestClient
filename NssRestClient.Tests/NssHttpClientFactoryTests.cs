@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace NssRestClient.Tests
 {
     [TestFixture]
-    public class HttpClientFactoryTests
+    public class NssHttpClientFactoryTests
     {
         [TestCase("")]
         [TestCase(null)]
@@ -19,7 +19,7 @@ namespace NssRestClient.Tests
             //Act
             void act()
             {
-                new HttpClientFactory().Create(url);
+                new NssHttpClientFactory().Create(url);
             }
 
             //Assert
@@ -30,7 +30,7 @@ namespace NssRestClient.Tests
         public void Create_ReturnsHttpClient_WhenBaseUrlIsValid()
         {
             //Act
-            var result = new HttpClientFactory().Create("http://biomni.com/nss");
+            var result = new NssHttpClientFactory().Create("http://biomni.com/nss");
 
             //Assert
             Assert.That(result, Is.Not.Null);
@@ -41,9 +41,9 @@ namespace NssRestClient.Tests
         public void Create_ReturnsTheSameHttpClientInstance_WhenBaseUrlIsTheSame()
         {
             //Act
-            var result1 = new HttpClientFactory().Create("http://biomni.com/nss");
-            var result2 = new HttpClientFactory().Create("http://biomni.com/nss");
-            var result3 = new HttpClientFactory().Create("http://biomni.com/nss/other");
+            var result1 = new NssHttpClientFactory().Create("http://biomni.com/nss");
+            var result2 = new NssHttpClientFactory().Create("http://biomni.com/nss");
+            var result3 = new NssHttpClientFactory().Create("http://biomni.com/nss/other");
 
             //Assert
             Assert.That(result1, Is.SameAs(result2));

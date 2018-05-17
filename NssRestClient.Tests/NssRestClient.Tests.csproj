@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\MoqExtensions.cs" />
-    <Compile Include="HttpClientFactoryTests.cs" />
+    <Compile Include="NssHttpClientFactoryTests.cs" />
     <Compile Include="NssRestClientTests.cs" />
     <Compile Include="LoginServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
