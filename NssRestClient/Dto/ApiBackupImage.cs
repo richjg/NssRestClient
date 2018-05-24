@@ -30,8 +30,6 @@ namespace NssRestClient.Dto
         /// The bytes actually transferred across the network during backup.
         /// </summary>
         public long TransferredSizeBytes { get; set; }
-
-        private DateTime backupTime;
         /// <summary>
         /// The date and time that the backup started.
         /// </summary>
